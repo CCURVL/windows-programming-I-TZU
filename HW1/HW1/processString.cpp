@@ -16,9 +16,28 @@ using namespace std;
 //       -1 if exception occur (ex. string containing non-digit character)
 int getAscendingStr(string& inputStr)
 {
-	
-	/// Please fill your code here
+	std::string input = inputStr;
+	std::istringstream ss(input);
+	std::string token;
 
+	std::vector<int> vArr;
+
+	while (std::getline(ss, token, ' ')) {
+		std::cout << token << '\n';
+		int temp = atoi(token.c_str());
+		vArr.push_back(temp);
+	}
+
+	std::vector<int> vArr1;
+	vArr1 = vArr;
+	int i, temp1;
+	for (unsigned i = 0; i < vArr1.size(); i + 1)
+		if (vArr1.at(i) > vArr1.at(i + 1))
+		{
+			temp1 = vArr1.at(i);
+			vArr1.at(i) = vArr1.at(i + 1);
+			vArr1.at(i + 1) = temp1;
+		}
 
 	return 0;
 }
@@ -36,8 +55,24 @@ int getAscendingStr(string& inputStr)
 //          (return vector size should be 0)
 int solveQ(vector<double> &x, double a, double b, double c)
 {
-
-	return 0;
+	if(b*b-4*a*c>0)
+	{
+		x.resize(2);
+		x.push_back(((-b) + sqrt(b*b - 4 * a*c)) / (2 * a));
+		x.push_back(((-b) - sqrt(b*b - 4 * a*c)) / (2 * a));
+		return 1;
+	}
+	else if(b*b-4*a*c<0)
+	{
+		x.resize(0);
+		return -1;
+	} 
+	else
+	{
+		x.resize(1);
+		x.push_back(((-b) + sqrt(b*b - 4 * a*c)) / (2 * a));
+		return 0;
+	}
 }
 
 int main(int argc, char*argv[]) {
