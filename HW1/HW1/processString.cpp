@@ -17,9 +17,9 @@ using namespace std;
 int getAscendingStr(string& inputStr)
 {
 	std::string input = inputStr;
-	
+
 	for (int i = 0; i<input.size(); i++)
-		if (int(input.c_str()[i]) != 32 && int(input.c_str()[i]) != 45 
+		if (int(input.c_str()[i]) != 32 && int(input.c_str()[i]) != 45
 			&& !(int(input.c_str()[i])>47 && int(input.c_str()[i])<58))
 			return -1;
 
@@ -41,13 +41,12 @@ int getAscendingStr(string& inputStr)
 	if (!vArr.empty())
 	{
 		std::copy(vArr.begin(), vArr.end() - 1,
-		std::ostream_iterator<int>(tmpStr, " "));
+			std::ostream_iterator<int>(tmpStr, " "));
 		tmpStr << vArr.back();
-		std::string input = tmpStr.str();
-		std::cout << input << std::endl;
+		std::string ANS = tmpStr.str();
+		std::cout << ANS << std::endl;
 		return 0;
 	}
-	
 }
 
 // solveQ Function requirement
