@@ -17,29 +17,37 @@ using namespace std;
 int getAscendingStr(string& inputStr)
 {
 	std::string input = inputStr;
+	
+	for (int i = 0; i<input.size(); i++)
+		if (int(input.c_str()[i]) != 32 && int(input.c_str()[i]) != 45 
+			&& !(int(input.c_str()[i])>47 && int(input.c_str()[i])<58))
+			return -1;
+
 	std::istringstream ss(input);
 	std::string token;
 
 	std::vector<int> vArr;
 
-	while (std::getline(ss, token, ' ')) {
-		std::cout << token << '\n';
+	while (std::getline(ss, token, ' '))
+	{
 		int temp = atoi(token.c_str());
 		vArr.push_back(temp);
 	}
 
-	std::vector<int> vArr1;
-	vArr1 = vArr;
-	int i, temp1;
-	for (unsigned i = 0; i < vArr1.size(); i + 1)
-		if (vArr1.at(i) > vArr1.at(i + 1))
-		{
-			temp1 = vArr1.at(i);
-			vArr1.at(i) = vArr1.at(i + 1);
-			vArr1.at(i + 1) = temp1;
-		}
+	std::sort(vArr.begin(), vArr.end());
 
-	return 0;
+	std::ostringstream tmpStr;
+
+	if (!vArr.empty())
+	{
+		std::copy(vArr.begin(), vArr.end() - 1,
+		std::ostream_iterator<int>(tmpStr, " "));
+		tmpStr << vArr.back();
+		std::string input = tmpStr.str();
+		std::cout << input << std::endl;
+		return 0;
+	}
+	
 }
 
 // solveQ Function requirement
@@ -55,22 +63,23 @@ int getAscendingStr(string& inputStr)
 //          (return vector size should be 0)
 int solveQ(vector<double> &x, double a, double b, double c)
 {
+	double d, e, f;
 	if(b*b-4*a*c>0)
 	{
-		x.resize(2);
-		x.push_back(((-b) + sqrt(b*b - 4 * a*c)) / (2 * a));
-		x.push_back(((-b) - sqrt(b*b - 4 * a*c)) / (2 * a));
+		d = ((-b) + sqrt(b*b - 4 * a*c)) / (2 * a);
+		e = ((-b) - sqrt(b*b - 4 * a*c)) / (2 * a);
+		x.push_back(d);
+		x.push_back(e);
 		return 1;
 	}
 	else if(b*b-4*a*c<0)
 	{
-		x.resize(0);
 		return -1;
 	} 
 	else
 	{
-		x.resize(1);
-		x.push_back(((-b) + sqrt(b*b - 4 * a*c)) / (2 * a));
+		f = (-b) / (2 * a);
+		x.push_back(f);
 		return 0;
 	}
 }
